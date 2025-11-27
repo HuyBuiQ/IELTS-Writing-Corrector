@@ -17,9 +17,9 @@ function App() {
     }
     setLoading(true);
     setResult(null);
-
+// http://localhost:5000/api/essay/check 
     try {
-      const response = await axios.post('http://localhost:5000/api/essay/check', {
+      const response = await axios.post('https://writing-one-chi.vercel.app/', {
         topic, essay
       });
       setResult(response.data);
