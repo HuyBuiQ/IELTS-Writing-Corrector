@@ -1,0 +1,15 @@
+# Bỏ qua các thư viện nặng
+node_modules/
+
+# Bỏ qua các file môi trường chứa mật khẩu (QUAN TRỌNG)
+.env
+.env.local
+.env.*.local
+
+# Bỏ qua các file hệ thống rác
+.DS_Store
+Thumbs.db
+
+# Bỏ qua file build (khi deploy nó tự build)
+dist/
+build/
