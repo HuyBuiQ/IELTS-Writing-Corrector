@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Tooltip } from 'react-tooltip';
-import * as Diff from 'diff'; 
-import './App.css'; 
+import * as Diff from 'diff';
+import './App.css';
 
 function App() {
   const [topic, setTopic] = useState('');
@@ -17,9 +17,9 @@ function App() {
     }
     setLoading(true);
     setResult(null);
-// http://localhost:5000/api/essay/check 
+    // http://localhost:5000/api/essay/check 
     try {
-      const response = await axios.post('https://writing-one-chi.vercel.app/', {
+      const response = await axios.post('https://ielts-writing-corrector.onrender.com', {
         topic, essay
       });
       setResult(response.data);
@@ -39,10 +39,10 @@ function App() {
     const findExplanation = (text, type) => {
       const mapping = result.explanationMapping || result.mistakes;
       if (!mapping) return "Cải thiện văn phong tự nhiên hơn.";
-      
+
       // tìm kiếm tương đối (chứa từ khóa)
-      const found = mapping.find(m => 
-        (type === 'removed' && m.original.includes(text.trim())) || 
+      const found = mapping.find(m =>
+        (type === 'removed' && m.original.includes(text.trim())) ||
         (type === 'added' && m.correction.includes(text.trim()))
       );
       // không thấy thì trả về giải thích chung chung
@@ -102,7 +102,7 @@ function App() {
         <h1>IELTS Writing Corrector</h1>
         <p>So sánh & Giải thích chi tiết bài viết IELTS Part 2</p>
       </div>
-      
+
       {/* input */}
       <div className="input-card">
         <div className="form-group">
@@ -121,35 +121,35 @@ function App() {
       {/* result */}
       {result && (
         <div className="result-section">
-          
+
           {/* 1. Score & Criteria */}
           <div className="score-card">
             <div className="score-big">{result.bandScore}</div>
-            <div style={{color: '#64748b', marginBottom: '15px'}}>Overall Band Score</div>
-            
+            <div style={{ color: '#64748b', marginBottom: '15px' }}>Overall Band Score</div>
+
             <div className="criteria-grid">
               {/* tự động duyệt qua 4 tiêu chí TR, CC, LR, GRA */}
               {result.criteria && Object.keys(result.criteria).map((key) => (
                 <div key={key}>
-                  <div 
-                    className="criteria-badge" 
+                  <div
+                    className="criteria-badge"
                     data-tooltip-id={`tooltip-${key}`}
-                    style={{cursor: 'pointer'}} // Con trỏ chuột hình bàn tay
+                    style={{ cursor: 'pointer' }} // Con trỏ chuột hình bàn tay
                   >
                     {key}: <span>{result.criteria[key].score}</span>
                   </div>
-                  
+
                   {/* Tooltip giải thích & Lời khuyên */}
-                  <Tooltip 
-                    id={`tooltip-${key}`} 
-                    className="custom-tooltip" 
+                  <Tooltip
+                    id={`tooltip-${key}`}
+                    className="custom-tooltip"
                     place="bottom"
                   >
-                    <div style={{textAlign: 'left'}}>
-                      <div style={{fontWeight: 'bold', color: '#2563eb', marginBottom: '5px'}}>
+                    <div style={{ textAlign: 'left' }}>
+                      <div style={{ fontWeight: 'bold', color: '#2563eb', marginBottom: '5px' }}>
                         {key} - {result.criteria[key].explanation}
                       </div>
-                      <div style={{borderTop: '1px solid #eee', paddingTop: '5px', marginTop: '5px'}}>
+                      <div style={{ borderTop: '1px solid #eee', paddingTop: '5px', marginTop: '5px' }}>
                         🎯 <strong>Lời khuyên:</strong> {result.criteria[key].advice}
                       </div>
                     </div>
@@ -167,7 +167,7 @@ function App() {
 
           {/* 3. split */}
           {renderDiffView()}
-          
+
         </div>
       )}
     </div>
