@@ -19,7 +19,7 @@ function App() {
     setResult(null);
     // http://localhost:5000/api/essay/check 
     try {
-      const response = await axios.post('https://ielts-writing-corrector.onrender.com', {
+      const response = await axios.post('https://ielts-writing-corrector.onrender.com/api/essay/check', {
         topic, essay
       });
       setResult(response.data);
