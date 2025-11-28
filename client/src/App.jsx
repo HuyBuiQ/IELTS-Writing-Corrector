@@ -114,7 +114,7 @@ function App() {
           <textarea className="textarea-field" rows="8" value={essay} onChange={e => setEssay(e.target.value)} />
         </div>
         <button className="btn-submit" onClick={handleCheck} disabled={loading}>
-          {loading ? "AI đang phân tích..." : "Chấm & So sánh"}
+          {loading ? "Đang phân tích..." : "Chấm & So sánh"}
         </button>
       </div>
 
