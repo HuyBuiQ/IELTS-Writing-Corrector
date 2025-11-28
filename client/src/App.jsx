@@ -106,11 +106,11 @@ function App() {
       {/* input */}
       <div className="input-card">
         <div className="form-group">
-          <label className="label">Topic:</label>
+          <label className="label">Chủ đề:</label>
           <input className="input-field" value={topic} onChange={e => setTopic(e.target.value)} />
         </div>
         <div className="form-group">
-          <label className="label">Your Essay:</label>
+          <label className="label">Bài làm:</label>
           <textarea className="textarea-field" rows="8" value={essay} onChange={e => setEssay(e.target.value)} />
         </div>
         <button className="btn-submit" onClick={handleCheck} disabled={loading}>
